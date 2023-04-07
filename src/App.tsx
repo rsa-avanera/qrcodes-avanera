@@ -47,15 +47,12 @@ const App: React.FC = () => {
   };
 
   const handleJSONDownload = () => {
-    const qrCodeProperties = { ...state };
-    delete qrCodeProperties.logoImage;
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(qrCodeProperties)
+      JSON.stringify({ ...state })
     )}`;
     const link = document.createElement('a');
     link.href = jsonString;
     link.download = 'qr_code_properties.json';
-
     link.click();
   };
 
