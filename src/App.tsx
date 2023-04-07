@@ -14,7 +14,7 @@ export enum AvaneraColor {
   TrustPurple = '#192356',
   VisionPurple = '#5041ed',
   White = '#f4f4f4',
-  WarmLightgrey = '#f4f4ed',
+  WarmLightgrey = '#ffffff',
   FadedBlue = '#e0f5ff',
   SoftPurple = '#8d84f3',
   SustainabilityLime = '#e0ff65',
@@ -86,16 +86,30 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          borderBottom: '2px solid black',
+        }}
+      >
         <div
-          style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxHeight: '700px',
+            overflowY: 'scroll',
+            padding: '32px',
+            flex: 1,
+          }}
         >
+          <h2>Logo and Color Properties </h2>
           <div
             style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
             <div
               style={{
-                width: '240px',
                 display: 'flex',
                 flexDirection: 'column',
                 padding: '15px',
@@ -155,7 +169,7 @@ const App: React.FC = () => {
               >
                 <SelectField
                   name="bgColor"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.bgColor}
                 />
@@ -167,7 +181,7 @@ const App: React.FC = () => {
                 />
                 <SelectField
                   name="fgColor"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.fgColor}
                 />
@@ -272,42 +286,42 @@ const App: React.FC = () => {
             </div>
           </div>
           <div style={{ padding: '15px' }}>
-            <p>eyeRadius</p>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <h2>EyeRadius Properties </h2>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '16px' }}>
               <div>
-                <p style={{ fontSize: 14 }}>Top left eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <h4 style={{ fontSize: 18 }}>Top left eye</h4>
+                <p style={{ fontSize: 16 }}>Outer</p>
                 {buildEyeRadiusInput('eyeradius_0_outer_0')}
                 {buildEyeRadiusInput('eyeradius_0_outer_1')}
                 {buildEyeRadiusInput('eyeradius_0_outer_2')}
                 {buildEyeRadiusInput('eyeradius_0_outer_3')}
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <p style={{ fontSize: 16 }}>Inner</p>
                 {buildEyeRadiusInput('eyeradius_0_inner_0')}
                 {buildEyeRadiusInput('eyeradius_0_inner_1')}
                 {buildEyeRadiusInput('eyeradius_0_inner_2')}
                 {buildEyeRadiusInput('eyeradius_0_inner_3')}
               </div>
               <div>
-                <p style={{ fontSize: 14 }}>Top right eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <h4 style={{ fontSize: 18 }}>Top right eye</h4>
+                <p style={{ fontSize: 16 }}>Outer</p>
                 {buildEyeRadiusInput('eyeradius_1_outer_0')}
                 {buildEyeRadiusInput('eyeradius_1_outer_1')}
                 {buildEyeRadiusInput('eyeradius_1_outer_2')}
                 {buildEyeRadiusInput('eyeradius_1_outer_3')}
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <p style={{ fontSize: 16 }}>Inner</p>
                 {buildEyeRadiusInput('eyeradius_1_inner_0')}
                 {buildEyeRadiusInput('eyeradius_1_inner_1')}
                 {buildEyeRadiusInput('eyeradius_1_inner_2')}
                 {buildEyeRadiusInput('eyeradius_1_inner_3')}
               </div>
               <div>
-                <p style={{ fontSize: 14 }}>Bottom left eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <h4 style={{ fontSize: 18 }}>Bottom left eye</h4>
+                <p style={{ fontSize: 16 }}>Outer</p>
                 {buildEyeRadiusInput('eyeradius_2_outer_0')}
                 {buildEyeRadiusInput('eyeradius_2_outer_1')}
                 {buildEyeRadiusInput('eyeradius_2_outer_2')}
                 {buildEyeRadiusInput('eyeradius_2_outer_3')}
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <p style={{ fontSize: 16 }}>Inner</p>
                 {buildEyeRadiusInput('eyeradius_2_inner_0')}
                 {buildEyeRadiusInput('eyeradius_2_inner_1')}
                 {buildEyeRadiusInput('eyeradius_2_inner_2')}
@@ -316,13 +330,13 @@ const App: React.FC = () => {
             </div>
           </div>
           <div style={{ padding: '15px' }}>
-            <p>eyeColor</p>
+            <h2>EyeColor Properties</h2>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '32px' }}>
               <div>
-                <p style={{ fontSize: 18 }}>Top left eye</p>
+                <h4 style={{ fontSize: 18 }}>Top left eye</h4>
                 <SelectField
                   name="eyecolor_0_outer"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_0_outer}
                 />
@@ -335,7 +349,7 @@ const App: React.FC = () => {
                 />
                 <SelectField
                   name="eyecolor_0_inner"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_0_inner}
                 />
@@ -348,10 +362,10 @@ const App: React.FC = () => {
                 />
               </div>
               <div>
-                <p style={{ fontSize: 18 }}>Top right eye</p>
+                <h4 style={{ fontSize: 18 }}>Top right eye</h4>
                 <SelectField
                   name="eyecolor_1_outer"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_1_outer}
                 />
@@ -364,7 +378,7 @@ const App: React.FC = () => {
                 />
                 <SelectField
                   name="eyecolor_1_inner"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_1_inner}
                 />
@@ -377,10 +391,10 @@ const App: React.FC = () => {
                 />
               </div>
               <div>
-                <p style={{ fontSize: 18 }}>Bottom left eye</p>
+                <h4 style={{ fontSize: 18 }}>Bottom left eye</h4>
                 <SelectField
                   name="eyecolor_2_outer"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_2_outer}
                 />
@@ -393,16 +407,16 @@ const App: React.FC = () => {
                 />
                 <SelectField
                   name="eyecolor_2_inner"
-                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  options={[...Object.values(AvaneraColor), '#000000']}
                   handleChange={handleChange}
                   value={state.eyecolor_2_inner}
                 />
                 <InputField
                   name="eyecolor_2_inner"
                   type="color"
-                  value={state.eyecolor_2_inner}
                   handleChange={handleChange}
                   hideLabel={true}
+                  value={state.eyecolor_2_inner}
                 />
               </div>
             </div>
@@ -410,13 +424,12 @@ const App: React.FC = () => {
         </div>
         <div
           style={{
-            width: 700,
-            height: 700,
+            width: 800,
+            height: 800,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             border: '1px solid #d4fafc',
-            borderRadius: '50px',
             backgroundColor: '#d4fafc',
           }}
         >
@@ -472,48 +485,40 @@ const App: React.FC = () => {
               eyeColor: [
                 // build eyeColor manually
                 {
-                  outer: state.eyecolor_0_outer ?? state.fgColor ?? '#000000',
-                  inner: state.eyecolor_0_inner ?? state.fgColor ?? '#000000',
+                  outer: state.eyecolor_0_outer,
+                  inner: state.eyecolor_0_inner,
                 },
                 {
-                  outer: state.eyecolor_1_outer ?? state.fgColor ?? '#000000',
-                  inner: state.eyecolor_1_inner ?? state.fgColor ?? '#000000',
+                  outer: state.eyecolor_1_outer,
+                  inner: state.eyecolor_1_inner,
                 },
                 {
-                  outer: state.eyecolor_2_outer ?? state.fgColor ?? '#000000',
-                  inner: state.eyecolor_2_inner ?? state.fgColor ?? '#000000',
+                  outer: state.eyecolor_2_outer,
+                  inner: state.eyecolor_2_inner,
                 },
               ],
             }}
           />
         </div>
       </div>
-      <button
-        type="button"
-        onClick={handleQRCodeDownload}
-        style={{ margin: '20px' }}
-      >
-        Download QR Code
-      </button>
-      <button
-        type="button"
-        onClick={handleJSONDownload}
-        style={{ margin: '20px' }}
-      >
-        Download Property JSON
-      </button>
-      <div style={{ marginLeft: '15px' }}>
-        <p>State snapshot (debug purposes)</p>
-        <ReactJson src={state} style={{ marginBottom: 40 }} />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: 12 }}
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <button
+          type="button"
+          onClick={handleQRCodeDownload}
+          style={{ margin: '20px' }}
         >
-          Learn React
-        </a>
+          Download QR Code
+        </button>
+        <button
+          type="button"
+          onClick={handleJSONDownload}
+          style={{ margin: '20px' }}
+        >
+          Download Property JSON
+        </button>
+        {/* <p>State snapshot (debug purposes)</p>
+        <ReactJson src={state} style={{ marginBottom: 40 }} /> */}
       </div>
     </div>
   );

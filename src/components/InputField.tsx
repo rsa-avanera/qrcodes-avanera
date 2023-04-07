@@ -24,6 +24,7 @@ export const InputField = ({
   hideLabel,
   value,
 }: IInputFieldProps) => {
+  console.log(name, value, type);
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', marginBottom: '6px' }}
