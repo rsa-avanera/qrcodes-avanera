@@ -23,8 +23,6 @@ export const SelectField = ({
       ? 'Custom'
       : null;
 
-  console.log(name, getOptionLabel(value), value);
-
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', marginBottom: '6px' }}
