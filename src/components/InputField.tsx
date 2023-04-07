@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { AvaneraColor, isAvaneraColor } from '../App';
 
 interface IInputFieldProps {
   name: string;
@@ -38,6 +39,7 @@ export const InputField = ({
         step={step || 1}
         defaultValue={defaultValue}
         value={value}
+        disabled={isAvaneraColor(value as AvaneraColor)}
       />
     </div>
   );

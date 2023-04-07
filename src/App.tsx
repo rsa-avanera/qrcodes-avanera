@@ -7,12 +7,29 @@ import { ImageUploadField } from './components/ImageUploadField';
 import { CheckboxField } from './components/CheckboxField';
 import ReactJson from 'react-json-view';
 import html2canvas from 'html2canvas';
+import { defaultState } from './defaultState';
+
+export enum AvaneraColor {
+  ContrastGrey = '#0c1229',
+  TrustPurple = '#192356',
+  VisionPurple = '#5041ed',
+  White = '#f4f4f4',
+  WarmLightgrey = '#f4f4ed',
+  FadedBlue = '#e0f5ff',
+  SoftPurple = '#8d84f3',
+  SustainabilityLime = '#e0ff65',
+}
+
+export const isAvaneraColor = (hexColor: string) =>
+  Object.values(AvaneraColor).includes(hexColor as AvaneraColor);
+
+export const getColorLabel = (hexColor: string) =>
+  Object.keys(AvaneraColor)[
+    Object.values(AvaneraColor).indexOf(hexColor as AvaneraColor)
+  ];
 
 const App: React.FC = () => {
-  const defaultSize = 256;
-  const [state, setState] = useState<{ [key: string]: any }>({
-    size: defaultSize,
-  });
+  const [state, setState] = useState<{ [key: string]: any }>(defaultState);
 
   const handleChange = ({ target }: any) => {
     setState((prevState) => ({ ...prevState, [target.name]: target.value }));
@@ -52,7 +69,6 @@ const App: React.FC = () => {
           min={0}
           max={50}
           hideLabel
-          defaultValue={25}
           value={(state as any)[id]}
         />
         <InputField
@@ -62,7 +78,6 @@ const App: React.FC = () => {
           min={0}
           max={50}
           hideLabel
-          defaultValue={25}
           value={(state as any)[id]}
         />
       </div>
@@ -86,19 +101,27 @@ const App: React.FC = () => {
                 padding: '15px',
               }}
             >
-              <TextArea name="value" handleChange={handleChange} />
+              <TextArea
+                name="value"
+                handleChange={handleChange}
+                value={state.value}
+              />
               <SelectField
                 name="ecLevel"
                 options={['L', 'M', 'Q', 'H']}
                 handleChange={handleChange}
+                value={state.ecLevel}
               />
-              <CheckboxField name="enableCORS" handleChange={handleChange} />
+              <CheckboxField
+                name="enableCORS"
+                handleChange={handleChange}
+                value={state.enableCORS}
+              />
               <InputField
                 name="size"
                 type="text"
                 handleChange={handleChange}
                 value={state.size}
-                defaultValue={defaultSize}
               />
               <InputField
                 name="size"
@@ -106,7 +129,6 @@ const App: React.FC = () => {
                 min={100}
                 max={512}
                 handleChange={handleChange}
-                defaultValue={defaultSize}
                 value={state.size}
               />
               <InputField
@@ -126,22 +148,34 @@ const App: React.FC = () => {
               <div
                 style={{
                   display: 'flex',
-                  flexDirection: 'row',
+                  flexDirection: 'column',
                   marginTop: '4px',
                   justifyContent: 'space-around',
                 }}
               >
+                <SelectField
+                  name="bgColor"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.bgColor}
+                />
                 <InputField
                   name="bgColor"
                   type="color"
-                  defaultValue="#ffffff"
                   handleChange={handleChange}
+                  value={state.bgColor}
+                />
+                <SelectField
+                  name="fgColor"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.fgColor}
                 />
                 <InputField
                   name="fgColor"
                   type="color"
-                  defaultValue="#000000"
                   handleChange={handleChange}
+                  value={state.fgColor}
                 />
               </div>
             </div>
@@ -159,7 +193,6 @@ const App: React.FC = () => {
                 type="text"
                 handleChange={handleChange}
                 value={state.logoWidth}
-                defaultValue={256}
               />
               <InputField
                 name="logoWidth"
@@ -174,7 +207,6 @@ const App: React.FC = () => {
                 type="text"
                 handleChange={handleChange}
                 value={state.logoHeight}
-                defaultValue={256}
               />
               <InputField
                 name="logoHeight"
@@ -191,7 +223,6 @@ const App: React.FC = () => {
                 value={state.logoOpacity}
                 min={0}
                 max={1}
-                defaultValue={1.0}
                 step={0.05}
               />
               <InputField
@@ -201,16 +232,17 @@ const App: React.FC = () => {
                 min={0}
                 max={1}
                 step={0.05}
-                defaultValue={1}
                 value={state.logoOpacity}
               />
               <SelectField
                 name="qrStyle"
                 options={['squares', 'dots']}
                 handleChange={handleChange}
+                value={state.qrStyle}
               />
               <CheckboxField
                 name="removeQrCodeBehindLogo"
+                value={state.removeQrCodeBehindLogo}
                 handleChange={handleChange}
               />
               <InputField
@@ -220,7 +252,6 @@ const App: React.FC = () => {
                 min={0}
                 max={20}
                 step={1}
-                defaultValue={0}
                 value={state.logoPadding}
               />
               <InputField
@@ -230,13 +261,13 @@ const App: React.FC = () => {
                 min={0}
                 max={20}
                 step={1}
-                defaultValue={0}
                 value={state.logoPadding}
               />
               <SelectField
                 name="logoPaddingStyle"
                 options={['square', 'circle']}
                 handleChange={handleChange}
+                value={state.logoPaddingStyle}
               />
             </div>
           </div>
@@ -286,60 +317,90 @@ const App: React.FC = () => {
           </div>
           <div style={{ padding: '15px' }}>
             <p>eyeColor</p>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '32px' }}>
               <div>
-                <p style={{ fontSize: 14 }}>Top left eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <p style={{ fontSize: 18 }}>Top left eye</p>
+                <SelectField
+                  name="eyecolor_0_outer"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_0_outer}
+                />
                 <InputField
                   name="eyecolor_0_outer"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
                   handleChange={handleChange}
                   hideLabel={true}
+                  value={state.eyecolor_0_outer}
                 />
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <SelectField
+                  name="eyecolor_0_inner"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_0_inner}
+                />
                 <InputField
                   name="eyecolor_0_inner"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
                   handleChange={handleChange}
                   hideLabel={true}
+                  value={state.eyecolor_0_inner}
                 />
               </div>
               <div>
-                <p style={{ fontSize: 14 }}>Top right eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <p style={{ fontSize: 18 }}>Top right eye</p>
+                <SelectField
+                  name="eyecolor_1_outer"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_1_outer}
+                />
                 <InputField
                   name="eyecolor_1_outer"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
                   handleChange={handleChange}
                   hideLabel={true}
+                  value={state.eyecolor_1_outer}
                 />
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <SelectField
+                  name="eyecolor_1_inner"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_1_inner}
+                />
                 <InputField
                   name="eyecolor_1_inner"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
                   handleChange={handleChange}
                   hideLabel={true}
+                  value={state.eyecolor_1_inner}
                 />
               </div>
               <div>
-                <p style={{ fontSize: 14 }}>Bottom left eye</p>
-                <p style={{ fontSize: 12 }}>Outer</p>
+                <p style={{ fontSize: 18 }}>Bottom left eye</p>
+                <SelectField
+                  name="eyecolor_2_outer"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_2_outer}
+                />
                 <InputField
                   name="eyecolor_2_outer"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
+                  value={state.eyecolor_2_outer}
                   handleChange={handleChange}
                   hideLabel={true}
                 />
-                <p style={{ fontSize: 12 }}>Inner</p>
+                <SelectField
+                  name="eyecolor_2_inner"
+                  options={[...Object.values(AvaneraColor), '#ffffff']}
+                  handleChange={handleChange}
+                  value={state.eyecolor_2_inner}
+                />
                 <InputField
                   name="eyecolor_2_inner"
                   type="color"
-                  defaultValue={state.fgColor ?? '#000000'}
+                  value={state.eyecolor_2_inner}
                   handleChange={handleChange}
                   hideLabel={true}
                 />
